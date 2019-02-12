@@ -139,26 +139,6 @@ request as needed - e.g. to add additional authorization headers to it.
 
 =head1 METHODS
 
-=head2 api_login
-
-Login to the API as a default user.
-
-=cut
-
-sub api_login ($test) {
-    $test->api_client->login;
-}
-
-=head2 api_logout
-
-Log out the currently logged in user.
-
-=cut
-
-sub api_logout ($test) {
-    $test->api_client->logout;
-}
-
 =head2 api_ok($title, \@request_args, \%expected)
 
     In: $title - (sub)test title
