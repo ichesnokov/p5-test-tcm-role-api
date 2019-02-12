@@ -20,6 +20,12 @@ no_index:
     - inc
     - t
 requires:
+  HTTP::Message: 0
+  JSON: 0
+  Moose: 0
+  Test::Deep: 0
+  Test::Differences: 0
+  Test::More: 0
   perl: 5.20.0
 resources:
   license: http://dev.perl.org/licenses/
