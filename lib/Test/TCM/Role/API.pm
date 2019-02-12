@@ -65,6 +65,7 @@ use Test::Deep qw(cmp_deeply);
 use Test::Differences qw(eq_or_diff);
 use Test::More;
 
+our $VERSION = 0.01;
 
 =head1 REQUIRED METHODS
 
