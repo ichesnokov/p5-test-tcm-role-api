@@ -2,7 +2,8 @@ package Test::TCM::Role::API;
 
 =head1 NAME
 
-Test::TCM::Role::API - tests PSGI-based JSON API using L<Test::Class::Moose>.
+Test::TCM::Role::API - Role to test PSGI-based JSON API using
+L<Test::Class::Moose>.
 
 =head1 SYNOPSIS
 
