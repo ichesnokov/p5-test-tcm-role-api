@@ -259,6 +259,14 @@ sub _process_test_results ( $test, $title, $expected ) {
     };
 }
 
+=head1 AUTHOR
+
+Ilya Chesnokov L<chesnokov@cpan.org>.
+
+=head1 LICENSE
+
+Under the same terms as Perl itself.
+
 =head1 CREDITS
 
 Many thanks to the following people and organizations:
