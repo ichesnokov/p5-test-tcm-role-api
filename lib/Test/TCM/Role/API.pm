@@ -57,16 +57,16 @@ use Moose::Role;
 use v5.20;
 use warnings;
 use experimental qw(smartmatch signatures);
+
 use Carp qw(croak);
 use HTTP::Request;
 use JSON qw(encode_json);
 use Plack::Test;
-
 use Test::Deep qw(cmp_deeply);
 use Test::Differences qw(eq_or_diff);
 use Test::More;
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 =head1 REQUIRED METHODS
 
