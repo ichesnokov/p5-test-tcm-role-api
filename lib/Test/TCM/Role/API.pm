@@ -53,7 +53,9 @@ Test::TCM::Role::API - tests PSGI-based JSON API using L<Test::Class::Moose>.
 
 use Moose::Role;
 
-use experimental qw(smartmatch);
+use v5.20;
+use warnings;
+use experimental qw(smartmatch signatures);
 use Carp qw(croak);
 use HTTP::Request;
 use JSON qw(encode_json);
