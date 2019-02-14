@@ -229,6 +229,7 @@ sub _process_test_results ( $test, $title, $expected ) {
                 my $ok = cmp_deeply(
                     $json_content,
                     $expected->{json_content},
+                    'Data is as expected'
                 ) or eq_or_diff($json_content, $expected->{json_content});
             }
             else {
