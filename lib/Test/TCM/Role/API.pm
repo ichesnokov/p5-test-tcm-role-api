@@ -35,7 +35,7 @@ L<Test::Class::Moose>.
             }
         );
 
-        $test->api_ok(
+        my $result = $test->api_ok(
             'Create character',
             [
                 POST => '/character' => {
@@ -45,8 +45,15 @@ L<Test::Class::Moose>.
             ],
             {
                 status       => HTTP_OK,
-                json_content => { success => 1 },
+                json_content => {
+                    success => 1,
+                    character_id => ignore(),
+                },
             }
+        );
+        is( $result->{id},
+            $test->fetch_last_character()->id,
+            'Result has a proper character ID'
         );
     }
 
@@ -152,6 +159,7 @@ request as needed - e.g. to add additional authorization headers to it.
             json_content - reference to a structure we expect, to be passed to
             C<Test::Deep::cmp_deeply> (so C<Test::Deep>'s functions can be used
             to skip / ignore some methods in it).
+    Out: $json_content - if result was a valid JSON, otherwise undef
 
 Perform API C<$method> request on the C<$route> and test its output against
 C<%expected> values.
