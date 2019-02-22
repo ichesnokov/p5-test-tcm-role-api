@@ -165,7 +165,7 @@ sub api_ok ( $test, $title, $request_args, $expected ) {
     local $Test::Builder::Level = $Test::Builder::Level + 1;
 
     $test->_perform_request($test->_generate_request(@$request_args));
-    $test->_process_test_results( $title, $expected );
+    return $test->_process_test_results( $title, $expected );
 }
 
 sub _generate_request ($test, $method, $route, $params = undef) {
@@ -205,6 +205,7 @@ sub _perform_request ($test, $request) {
 sub _process_test_results ( $test, $title, $expected ) {
     local $Test::Builder::Level = $Test::Builder::Level + 1;
 
+    my $json_content;
     subtest $title => sub {
 
         if ( exists $expected->{status} ) {
@@ -220,24 +221,23 @@ sub _process_test_results ( $test, $title, $expected ) {
         }
 
         if ( exists $expected->{json_content} ) {
-            if ( my $json_content = eval {
-                decode_json($test->api_client->content);
-            } )
-            {
-                # eq_or_diff() is only used to output diagnostics in case of a
-                # test failure.
-                my $ok = cmp_deeply(
-                    $json_content,
-                    $expected->{json_content},
-                    'Data is as expected'
-                ) or eq_or_diff($json_content, $expected->{json_content});
-            }
-            else {
+            $json_content = eval { decode_json($test->api_client->content); }
+              or do {
                 fail("We've got a proper JSON response");
-                diag( 'Got: ' . $test->api_client->response->as_string );
-            }
+                diag('Got: ' . $test->api_client->response->as_string);
+                return;
+              };
+
+            # eq_or_diff() is only used to output diagnostics in case of a
+            # test failure.
+            cmp_deeply(
+                $json_content,
+                $expected->{json_content},
+                'Data is as expected'
+            ) or eq_or_diff($json_content, $expected->{json_content});
         }
     };
+    return $json_content;
 }
 
 =head1 AUTHOR
